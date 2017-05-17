@@ -4,11 +4,12 @@ from rtree import index
 
 r.seed(1392781243)
 
-percent_within_lower_bound = .2  # less than 25% because of corners
+'''percent_within_lower_bound = .2  # less than 25% because of corners'''
 
 
-class LowProbabilityError(Exception):
-    pass
+'''class LowProbabilityError(Exception):
+    pass'''
+
 
 class ArrayFullError(Exception):
     pass
@@ -22,12 +23,13 @@ def generate_neuron_input_points(center_x, center_y, sigma_x, sigma_y, max_width
     assert (center_x >= 0 and center_x < max_width)
     assert (center_y >= 0 and center_y < max_height)
 
-    x_percent_within = norm(center_x, sigma_x).cdf(max_width) - norm(center_x, sigma_x).cdf(0)
+    '''x_percent_within = norm(center_x, sigma_x).cdf(max_width) - norm(center_x, sigma_x).cdf(0)
     y_percent_within = norm(center_y, sigma_y).cdf(max_height) - norm(center_y, sigma_y).cdf(0)
     if x_percent_within * y_percent_within > percent_within_lower_bound:
         raise LowProbabilityError(
             str(percent_within_lower_bound * 100) + '% of generated points will be out of bounds,'
-                                                    ' generating failed cycles.')
+                                                    ' generating failed cycles.')'''
+    # Whoops. The points will actually end up going everywhere except the center.
 
     idx_inserted = index.Index()
     idx_open = index.Index()
@@ -87,7 +89,6 @@ def generate_neuron_input_points(center_x, center_y, sigma_x, sigma_y, max_width
         # un-open inserted location
         if len(list(idx_open.intersection(bbox))) != 0:
             idx_open.delete(max_width*bbox[1]+bbox[0], bbox)
-
 
     input_points = []
     for i in range(num_synapses):
