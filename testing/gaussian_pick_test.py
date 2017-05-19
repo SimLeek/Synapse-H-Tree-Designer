@@ -14,7 +14,8 @@ class TestScatter(unittest.TestCase):
         scatter.show_scatter(self.points)
 
     def test_normal(self):
-
+        # takes too long
+        # consider not using rtree, or at least not unless too many points fail (law of diminishing returns)
         self.points = gaus.generate_neuron_input_points(50, 50, 20, 20, 100, 100, 2000)
         scatter.show_scatter(self.points)
 
