@@ -17,7 +17,6 @@ class ArrayFullError(Exception):
 
 def generate_neuron_input_points(center_x, center_y, sigma_x, sigma_y, max_width, max_height, num_synapses):
     """Creates a gaussian distribution of points that a neuron can get input from, limited to rectangular bounds."""
-    # todo: can't pick same points, need to use a-star algorithm to find nearest open space
     # Use 2 r-trees, create all 8 points surrounding inserted point, search for nearest open spot on collision fail.
 
     assert (center_x >= 0 and center_x < max_width)
@@ -56,35 +55,35 @@ def generate_neuron_input_points(center_x, center_y, sigma_x, sigma_y, max_width
         if len(list(idx_inserted.intersection(bbox_u))) == 0 \
                 and len(list(idx_open.intersection(bbox_u))) == 0 \
                 and bbox_u != bbox:
-            idx_open.insert(max_width*bbox_u[1]+bbox_u[0], bbox_u)
+            idx_open.insert(int(max_width*bbox_u[1]+bbox_u[0]), bbox_u)
         if len(list(idx_inserted.intersection(bbox_d))) == 0 \
                 and len(list(idx_open.intersection(bbox_d))) == 0 \
                 and bbox_d != bbox:
-            idx_open.insert(max_width*bbox_d[1]+bbox_d[0], bbox_d)
+            idx_open.insert(int(max_width*bbox_d[1]+bbox_d[0]), bbox_d)
         if len(list(idx_inserted.intersection(bbox_l))) == 0 \
                 and len(list(idx_open.intersection(bbox_l))) == 0 \
                 and bbox_l != bbox:
-            idx_open.insert(max_width*bbox_l[1]+bbox_l[0], bbox_l)
+            idx_open.insert(int(max_width*bbox_l[1]+bbox_l[0]), bbox_l)
         if len(list(idx_inserted.intersection(bbox_r))) == 0 \
                 and len(list(idx_open.intersection(bbox_r))) == 0 \
                 and bbox_r != bbox:
-            idx_open.insert(max_width*bbox_r[1]+bbox_r[0], bbox_r)
+            idx_open.insert(int(max_width*bbox_r[1]+bbox_r[0]), bbox_r)
         if len(list(idx_inserted.intersection(bbox_ul))) == 0 \
                 and len(list(idx_open.intersection(bbox_ul))) == 0 \
                 and bbox_ul != bbox:
-            idx_open.insert(max_width*bbox_ul[1]+bbox_ul[0], bbox_ul)
+            idx_open.insert(int(max_width*bbox_ul[1]+bbox_ul[0]), bbox_ul)
         if len(list(idx_inserted.intersection(bbox_dl))) == 0 \
                 and len(list(idx_open.intersection(bbox_dl))) == 0 \
                 and bbox_dl != bbox:
-            idx_open.insert(max_width*bbox_dl[1]+bbox_dl[0], bbox_dl)
+            idx_open.insert(int(max_width*bbox_dl[1]+bbox_dl[0]), bbox_dl)
         if len(list(idx_inserted.intersection(bbox_ur))) == 0 \
                 and len(list(idx_open.intersection(bbox_ur))) == 0 \
                 and bbox_ur != bbox:
-            idx_open.insert(max_width*bbox_ur[1]+bbox_ur[0], bbox_ur)
+            idx_open.insert(int(max_width*bbox_ur[1]+bbox_ur[0]), bbox_ur)
         if len(list(idx_inserted.intersection(bbox_dr))) == 0 \
                 and len(list(idx_open.intersection(bbox_dr))) == 0 \
                 and bbox_dr != bbox:
-            idx_open.insert(max_width*bbox_dr[1]+bbox_dr[0], bbox_dr)
+            idx_open.insert(int(max_width*bbox_dr[1]+bbox_dr[0]), bbox_dr)
 
         # un-open inserted location
         if len(list(idx_open.intersection(bbox))) != 0:
